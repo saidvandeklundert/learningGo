@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"log"
-
+    "example"
 	"github.com/openconfig/ygot/ygot"
-	//"github.com/openconfig/ygot/ygot"
+	
 )
 
 func main() {
 	// Create an instance of the config struct
-	cfg := &ExampleConfig_Config.Config{}
+	cfg := &example.ExampleConfig_Config{}
 
 	// Populate the struct
 	cfg.Name = ygot.String("John Doe")
