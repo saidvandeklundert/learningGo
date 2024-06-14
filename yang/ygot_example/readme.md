@@ -2,10 +2,15 @@
 
 YGOT is a YANG centric toolkit: https://github.com/openconfig/ygot
 
+One of the things you can do with it is generate Go code from yang models. 
 
-One of the things you can do with it is generate Go code from yang models.
+This code does just that:
+`main.go`: creates and validates a struct using code that was generated using ygot
+`/example/exampleconfig.go`: contains the code that ygot generated
+`example-config.yang`: the Yang model used in this example
 
-Some steps (your mileage may vary):
+
+Some steps to build it yourself (your mileage may vary):
 
 
 ```
@@ -23,8 +28,6 @@ go get github.com/openconfig/ygot/ygot
 
 generator -path="/home/klundert/learningGo/yang/ygot_example/example/" -output_file="/home/klundert/learningGo/yang/ygot_example/example/exampleconfig.go" -package_name=example example-config.yang
 ```
-
-
 
 
 
