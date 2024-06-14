@@ -23,3 +23,8 @@ go test . -v
 
 ### add something to workspace (from the workspace root)
 go work use app-upload
+
+
+
+
+https://go.dev/blog/get-familiar-with-workspaces
