@@ -1,18 +1,27 @@
-go get github.com/openconfig/ygot/generator
-go install github.com/openconfig/ygot/generator
-go get github.com/openconfig/ygot/ygot
+## YGOT
 
-generator -path="/home/klundert/learningGo/yang/ygot_example/example/" -output_file="/home/klundert/learningGo/yang/ygot_example/example/exampleconfig.go" -package_name=example example-config.yang
+YGOT is a YANG centric toolkit: https://github.com/openconfig/ygot
 
+
+One of the things you can do with it is generate Go code from yang models.
+
+Some steps (your mileage may vary):
 
 
 ```
 docker pull golang
 sudo docker run --name='go_learn' --hostname='go_learn' -p 8080:8080  -di golang:latest /bin/sh
+sudo docker exec -it -u root go_learn bash
 adduser klundert
 usermod -aG sudo klundert
 su --login klundert
 go env -w GOPROXY=direct
+
+go get github.com/openconfig/ygot/generator
+go install github.com/openconfig/ygot/generator
+go get github.com/openconfig/ygot/ygot
+
+generator -path="/home/klundert/learningGo/yang/ygot_example/example/" -output_file="/home/klundert/learningGo/yang/ygot_example/example/exampleconfig.go" -package_name=example example-config.yang
 ```
 
 
