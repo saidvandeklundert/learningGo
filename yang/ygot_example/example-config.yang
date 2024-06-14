@@ -1,0 +1,20 @@
+module example-config {
+  namespace "http://example.com/ns/example-config";
+  prefix ec;
+
+  container config {
+    leaf name {
+      type string;
+    }
+    leaf age {
+      type uint8 {
+        range "0..150";
+      }
+    }
+    leaf email {
+      type string {
+        pattern "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}";
+      }
+    }
+  }
+}
