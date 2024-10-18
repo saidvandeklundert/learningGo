@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"compress/gzip"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -38,8 +41,71 @@ func readTheEntireFile(filename string) {
 	fmt.Print(string(data[0:100]))
 
 }
+
+func zipFile(filename string) {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		fmt.Println("handle this error")
+	}
+	var b bytes.Buffer
+	gz := gzip.NewWriter(&b)
+
+	_, err = gz.Write(data)
+
+	if err != nil {
+		fmt.Println("handle errer: ", err)
+		return
+	}
+
+	if err = gz.Flush(); err != nil {
+		return
+	}
+
+	if err = gz.Close(); err != nil {
+		return
+	}
+
+	compressedData := b.Bytes()
+	zippedName := fmt.Sprintf("%s_zipped", filename)
+	fmt.Println("writing zipped data to :", zippedName)
+	f, err := os.Create(zippedName)
+	if err != nil {
+		fmt.Println("\nshould handle this error: ", err)
+		return
+	}
+	defer f.Close()
+	f.Write(compressedData)
+
+}
+
+func unzipAndPrint(filename string) {
+	fmt.Println("unzip file ", filename)
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		fmt.Println("handle this error")
+	}
+	b := bytes.NewBuffer(data)
+
+	var r io.Reader
+	r, err = gzip.NewReader(b)
+	if err != nil {
+		return
+	}
+
+	var resB bytes.Buffer
+	_, err = resB.ReadFrom(r)
+	if err != nil {
+		return
+	}
+
+	resData := resB.Bytes()
+	fmt.Print(string(resData[0:100]))
+
+}
 func main() {
 	filename := "/tmp/example.txt"
 	createAndWriteToFile(filename)
 	readTheEntireFile(filename)
+	zipFile(filename)
+	unzipAndPrint(fmt.Sprintf("%s_zipped", filename))
 }
