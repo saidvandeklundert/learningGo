@@ -42,8 +42,13 @@ func getLineNumbers(line string) (string, string) {
 		if res != -1 {
 			tracker[res] = number
 		}
+		last_occurence := strings.LastIndex(line, number)
+		if res != -1 {
+			tracker[last_occurence] = number
+		}
 
 	}
+
 	fmt.Println(tracker)
 	keys := make([]int, 0, len(tracker))
 
@@ -70,10 +75,15 @@ func puzzle() {
 	assignmentInput := setup.GetPuzzleInput("2023", "1")
 	fmt.Println((assignmentInput))
 	fmt.Println("aoc20231b ran")
-	line := "seven443six8three31"
-	number1, number2 := getLineNumbers(line)
-	line_result := GenerateNumber(number1, number2)
-	fmt.Println(line_result)
+	solution := 0
+	for _, line := range strings.Split(assignmentInput, "\n") {
+		fmt.Println(line)
+		number1, number2 := getLineNumbers(line)
+		line_result := GenerateNumber(number1, number2)
+
+		solution += line_result
+	}
+	fmt.Println(solution)
 
 }
 
