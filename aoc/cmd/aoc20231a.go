@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"aoc/pkg/setup"
+	"aoc/pkg/test"
 	"fmt"
 
 	"strconv"
@@ -65,7 +65,7 @@ var aoc20231aCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("aoc20231a called")
 		total := 0
-		assignmentInput := setup.GetPuzzleInput("2023", "1")
+		assignmentInput := test.GetPuzzleInput("2023", "1")
 		for _, line := range strings.Split(assignmentInput, "\n") {
 			digits := getDigitsFromLine(line)
 			fmt.Println(*digits.Number1, *digits.Number2)

@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"aoc/pkg/setup"
+	"aoc/pkg/test"
 	"fmt"
 	"sort"
 	"strconv"
@@ -70,9 +70,9 @@ func GenerateNumber(number1 string, number2 string) int {
 	num, _ := strconv.Atoi(number)
 	return num
 }
-func puzzle() {
+func Puzzle20231b() {
 
-	assignmentInput := setup.GetPuzzleInput("2023", "1")
+	assignmentInput := test.GetPuzzleInput("2023", "1")
 	fmt.Println((assignmentInput))
 	fmt.Println("aoc20231b ran")
 	solution := 0
@@ -84,6 +84,8 @@ func puzzle() {
 		solution += line_result
 	}
 	fmt.Println(solution)
+	expected := 55218
+	test.Assert(solution == expected, fmt.Sprintf("got %d want %d", solution, expected))
 
 }
 
@@ -93,7 +95,7 @@ var aoc20231bCmd = &cobra.Command{
 	Short: "aoc20231b",
 	Long:  `aoc20231b`,
 	Run: func(cmd *cobra.Command, args []string) {
-		puzzle()
+		Puzzle20231b()
 
 	},
 }

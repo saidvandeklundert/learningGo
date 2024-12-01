@@ -1,4 +1,4 @@
-package setup
+package test
 
 import (
 	"fmt"
@@ -21,4 +21,11 @@ func GetPuzzleInput(year string, puzzle_number string) string {
 	}
 	return string(content)
 
+}
+
+func Assert(condition bool, message string) {
+	if !condition {
+		fmt.Println("WARNING, OUTCOME IS NOT WHAT IS EXPECTED!")
+		fmt.Println(message)
+	}
 }
