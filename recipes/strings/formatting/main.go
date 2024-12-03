@@ -46,4 +46,14 @@ func main() {
 			}
 		}
 	}
+
+	// iterate all chars rune by rune
+	someNewString := "ABCDEFG👍"
+	for i := 0; i < len(someNewString); i++ { //run a loop and iterate through each character
+		fmt.Printf("%c ", someNewString[i]) //print characters along with the space character
+	}
+	runes := []rune(someNewString)
+	for i := 0; i < len(runes); i++ {
+		fmt.Printf("%c ", runes[i])
+	}
 }
