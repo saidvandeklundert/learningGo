@@ -22,7 +22,41 @@ go fmt
 
 # run tests:
 go test
+go test -v
 
+# check test coverage:
+go test -cover .
+go test -coverprofile=coverage.out
+go tool cover -html=coverage.out
+
+# put tests in 'file-name'_test.go in the same folder and
+# prefer table tests. Example:
+```
+```go
+func Test_isPrimeTableTests(t *testing.T) {
+	primeTests := []struct {
+		name     string
+		testNum  int
+		expected bool
+		msg      string
+	}{
+		{"prime", 7, true, "7 is a prime number!"},
+		{"not prime", 8, false, "8 is not a prime number because it is divisible by 2"},
+	}
+
+	for _, tc := range primeTests {
+		result, msg := isPrime(tc.testNum)
+		if result != tc.expected {
+			t.Errorf("%s: expected %t got %t", tc.name, tc.expected, result)
+		}
+
+		if msg != tc.msg {
+			t.Errorf("%s: expected %s got %s", tc.name, tc.msg, msg)
+		}
+	}
+}
+```
+```
 # check for potential errors or suspicious constructs
 go vet
 
