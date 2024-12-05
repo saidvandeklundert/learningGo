@@ -125,3 +125,27 @@ go tool pprof -web memprofile.out
 # sync workspace code:
 go work sync
 ```
+
+
+
+
+
+Information on Make:
+https://github.com/franneck94/UdemyMakefile
+
+```
+# check what version of make is installed:
+make --version
+# do a dryrun:
+make -n
+
+# run the makefile
+make run
+
+# the above runs the first target
+# convention is to add an 'all' target to your make and then:
+make all
+
+# check pre-defined variables
+make -p
+```

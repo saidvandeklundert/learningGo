@@ -1,7 +1,9 @@
 package main
 
 import (
+	"io"
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -39,17 +41,52 @@ func Test_isPrimeTableTests(t *testing.T) {
 	}
 }
 
-
-
 func Test_prompt(t *testing.T) {
 
 	// save a copy of os.Stdout
 	oldOut := os.Stdout
 
 	// create a read and write pipe
-	r,w,_ := os.Pipe()
+	r, w, _ := os.Pipe()
 
 	// set os.Stdout to our write pipe
 	os.Stdout = w
-	
+
+	prompt()
+
+	// close our writer
+	_ = w.Close()
+
+	// reset os.Stdout
+	os.Stdout = oldOut
+
+	// read output of out prompt function
+	out, _ := io.ReadAll(r)
+
+	// perform the test
+	if string(out) != "-> " {
+		t.Errorf("incorrect prompt: expected '-> ' but got %s", string(out))
+	}
+
+}
+
+func Test_intro(t *testing.T) {
+
+	oldOut := os.Stdout
+
+	r, w, _ := os.Pipe()
+
+	os.Stdout = w
+
+	intro()
+
+	_ = w.Close()
+
+	os.Stdout = oldOut
+
+	out, _ := io.ReadAll(r)
+
+	if !strings.Contains(string(out), "Enter a whole number") {
+		t.Errorf("Expected 'Enter a whole number' to be present in the 'intro()'")
+	}
 }
