@@ -1,7 +1,14 @@
 # TARGETS
 
 MY_VARIABLE = Make!
-all: message build run compile final_message
+
+define macro_example
+	@echo "+++ invoked by $@ +++"
+	echo "macro called"
+
+endef
+
+all: message build run compile invoke_include final_message
 
 pre_message:
 	echo "building"
@@ -14,6 +21,8 @@ build:
 
 run:
 	go run main.go
+	$(call macro_example, $@)
+
 
 compile:
 	echo "compiling for other architectures"
@@ -21,6 +30,11 @@ compile:
 	GOOS=freebsd GOARCH=386 go build -o bin/main-freebsd-386 main.go
 	GOOS=linux GOARCH=386 go build -o bin/main-linux-386 main.go
 	GOOS=windows GOARCH=386 go build -o bin/main-windows-386 main.go
+
+invoke_include:
+	echo "invoke include"
+	@echo "Invoking include.mk"
+	@$(MAKE) -f include.mk hello GREETING="from the first Makefile"
 
 final_message:
 	echo "all done now"

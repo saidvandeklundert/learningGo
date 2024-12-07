@@ -148,4 +148,14 @@ make all
 
 # check pre-defined variables
 make -p
+
+$@ is a special automatic variable that represents the target of the current rule. It's one of the most commonly used automatic variables in Make.
+
+The meaning of $@:
+- In a rule: It represents the file name of the target of the rule.
+- In a recipe: It represents the name of the target that caused the recipe to be run.
+
+
+# passing or altering a make variable:
+make all MY_VARIABLE=SOMETHINGELSE
 ```
