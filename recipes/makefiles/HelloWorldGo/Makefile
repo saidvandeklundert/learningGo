@@ -1,4 +1,5 @@
 # TARGETS
+# make all MY_VARIABLE=SOMETHINGELSE
 
 MY_VARIABLE = Make!
 
@@ -35,6 +36,8 @@ invoke_include:
 	echo "invoke include"
 	@echo "Invoking include.mk"
 	@$(MAKE) -f include.mk hello GREETING="from the first Makefile"
+	@$(MAKE) -f include.mk clone
+	@$(MAKE) -f include.mk move
 
 final_message:
 	echo "all done now"
