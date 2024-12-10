@@ -22,7 +22,9 @@ go fmt
 
 # run tests:
 go test
+go test .
 go test -v
+go test -run Test_name		# will run all tests that have this substring in the name
 
 # check test coverage:
 go test -cover .
@@ -158,4 +160,12 @@ The meaning of $@:
 
 # passing or altering a make variable:
 make all MY_VARIABLE=SOMETHINGELSE
+
+# writing to stderr and exiting the make:
+
+target:
+    @if [ some_condition ]; then \
+        echo "Some error message" >&2; \
+        exit 1; \
+    fi
 ```

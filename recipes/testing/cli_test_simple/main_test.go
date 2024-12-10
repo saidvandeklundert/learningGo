@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -120,5 +121,21 @@ func Test_checkNumbers_table_test(t *testing.T) {
 			t.Errorf("%s expected %s but got: %s", test.name, test.expected, res)
 		}
 	}
+
+}
+
+func Test_readUserInput(t *testing.T) {
+	// to test this function, we need a channel and an instance of an io.Reader
+	doneChan := make(chan bool)
+
+	// create a reference to a bytes.Buffer (has a read method)
+	var stdin bytes.Buffer
+
+	// simulate user typing 1, q and enter
+	stdin.Write([]byte("1\nq\n"))
+
+	go readUserInput(&stdin, doneChan)
+	<-doneChan
+	close(doneChan)
 
 }

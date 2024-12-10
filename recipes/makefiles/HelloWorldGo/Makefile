@@ -13,6 +13,10 @@ all: message build run compile invoke_include final_message
 
 pre_message:
 	echo "building"
+	./make_support.sh
+	# uncomment the following to write to STDERR and exit make
+	#echo "Some error message" >&2;
+	#exit 1
 
 message: pre_message # pre_message is called as a pre-requisite here
 	echo "a Go project with $(MY_VARIABLE)!"
