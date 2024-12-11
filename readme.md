@@ -25,7 +25,7 @@ go test
 go test .
 go test -v
 go test -run Test_name		# will run all tests that have this substring in the name
-
+go test ./..				# runs test in this and all nested directories
 # check test coverage:
 go test -cover .
 go test -coverprofile=coverage.out
